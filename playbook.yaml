@@ -10,22 +10,23 @@
     loop:
       - httpd
       - php
+
   - name: Arret du service nginx
     systemd:
-    name: nginx
-    state: stopped
+     name: nginx
+     state: stopped
  
- - name: Demarrage de httpd
-   systemd:
-   name:
-   state: started
+  - name: Demarrage de httpd
+    systemd:
+     name: httpd
+     state: started
 
- - name: suppression fichier index.html
-   file:
-    path: /var/www/html/index.html
-    state: present
+  - name: suppression fichier index.html
+    file:
+     path: /var/www/html/index.html
+     state: present
    
- - name: copie du php info
-   copy:
-    src: index.php
-    dest: /var/www/html/  
+  - name: copie du php info
+    copy:
+     src: index.php
+     dest: /var/www/html/  
