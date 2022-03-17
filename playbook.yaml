@@ -1,0 +1,31 @@
+---
+
+- hosts: 192.168.0.37
+  
+  tasks:
+  - name: Installation de Apache et php
+    dnf:
+     name: "{{ item }}"
+     state: present
+    loop:
+      - httpd
+      - php
+  - name: Arret du service nginx
+    systemd:
+    name: nginx
+    state: stopped
+ 
+ - name: Demarrage de httpd
+   systemd:
+   name:
+   state: started
+
+ - name: suppression fichier index.html
+   file:
+    path: /var/www/html/index.html
+    state: present
+   
+ - name: copie du php info
+   copy:
+    src: index.php
+    dest: /var/www/html/  
